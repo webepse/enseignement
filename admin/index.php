@@ -46,7 +46,7 @@ if(isset($_POST['username']))
 <body>
     
     <div class="container">
-        <div class="col-4 offset-3 bg-light p-5">
+        <div class="col-4 offset-4 bg-light p-5">
             <h1>Administration</h1>
         <form action="index.php" method="POST">
             <div class="form-group">
