@@ -1,5 +1,11 @@
 <?php
-    require "connexion.php";
+    if(isset($_GET['search']))
+    {
+        $search=htmlspecialchars($_GET['search']);
+    }else{
+        $search="";
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -24,9 +30,55 @@
             <li><a href="search.php">Recherche</a></li>
         </ul>
     </nav>
-    <section>
+   
+    <div class="container">
        <h1>Recherche</h1>
-    </section>
+            <form action="search.php" method="GET">
+                <div class="form-group">
+                    <label for="search">Recherche: </label>
+                    <input type="text" name="search" id="search" placeholder="Votre recherche" value="<?= $search ?>">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Rechercher">
+                </div>
+            </form>
+
+      
+        <?php
+            if(isset($_GET['search']))
+            {
+                if(!empty($search))
+                {
+                    require "connexion.php";
+                    //$req = $bdd->prepare("SELECT * FROM options WHERE branche LIKE ?");
+                    //$req->execute(['%'.$search.'%'])
+
+                    $req = $bdd->prepare("SELECT * FROM options WHERE branche LIKE :search OR degre LIKE :search");
+                    $req->execute([
+                        ":search"=>'%'.$search.'%'
+                    ]);
+                    $count = $req->rowCount();
+                    if($count>0)
+                    {
+                        while($don = $req->fetch())
+                        {
+                            echo '<a href="branche.php?id='.$don['id'].'" class="cards">';
+                            echo '<div class="title">'.$don['branche'].'</div>';
+                            echo '<div class="description">'.nl2br($don['description']).'</div>';
+                            echo '</a>';
+                        }
+                    }else{
+                        echo "<div>Auncun résultat pour votre recherche</div>";
+                    }
+                    $req->closeCursor();
+                }else{
+                    echo '<div>Veuillez remplir le formulaire</div>';
+                }
+
+            }
+
+        ?>
+         </div>
     <footer></footer>
 </body>
 </html>

@@ -54,3 +54,7 @@ section{
     font-size: 2em;
     margin-bottom: 15px;
 }
+
+.container{
+    min-height: 55vh;
+}
