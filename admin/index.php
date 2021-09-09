@@ -44,9 +44,7 @@ if(isset($_POST['username']))
     <title>Enseignement - Admin - connexion</title>
 </head>
 <body>
-    <?php
-        include("navbar.php");
-    ?>
+    
     <div class="container">
         <div class="col-4 offset-3 bg-light p-5">
             <h1>Administration</h1>
