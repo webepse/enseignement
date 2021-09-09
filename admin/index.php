@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if(isset($_POST['username']))
 {
        if(empty($_POST['username']) OR empty($_POST['password']))
@@ -16,7 +16,9 @@ if(isset($_POST['username']))
                 var_dump($don);
                 if(password_verify($password,$don['password']))
                 {
-
+                    $_SESSION['login']=$don['login'];
+                    $_SESSION['id']=$don['id']; // pour exemple
+                    header("LOCATION:dashboard.php");
                 }else{
                     $error="Mot de passe incorrect";
                 }
