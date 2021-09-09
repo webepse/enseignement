@@ -1,3 +1,35 @@
+<?php
+
+if(isset($_POST['username']))
+{
+       if(empty($_POST['username']) OR empty($_POST['password']))
+       {
+         $error="form vide vide";
+       }else{
+           require "../connexion.php";
+           $username=htmlspecialchars($_POST['username']);
+           $password=$_POST['password'];
+           $login=$bdd->prepare("SELECT * FROM admin WHERE login=?");
+           $login->execute([$username]);
+           if($don=$login->fetch())
+           {
+                var_dump($don);
+                if(password_verify($password,$don['password']))
+                {
+
+                }else{
+                    $error="Mot de passe incorrect";
+                }
+           }else{
+               $error="Votre login n'existe pas";
+           }
+       }
+
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +53,12 @@
                 <input type="submit" value="Envoyer">
             </div>
         </form>
+        <?php
+            if(isset($error))
+            {
+                echo $error;
+            }
+        ?>
     </div>
 </body>
 </html>
