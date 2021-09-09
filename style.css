@@ -58,3 +58,10 @@ section{
 .container{
     min-height: 55vh;
 }
+
+.search{
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px 10px;
+    padding: 15px;
+}

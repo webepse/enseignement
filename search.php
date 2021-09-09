@@ -43,7 +43,7 @@
                 </div>
             </form>
 
-      
+      <div class="search">
         <?php
             if(isset($_GET['search']))
             {
@@ -78,6 +78,7 @@
             }
 
         ?>
+        </div>
          </div>
     <footer></footer>
 </body>
