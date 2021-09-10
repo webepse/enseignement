@@ -8,6 +8,7 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="dashboard.php">Dashboard</a>
         <a class="nav-link" href="branches.php">Branche</a>
+        <a class="nav-link" href="admin.php">Admin</a>
       </div>
     </div>
     <div class="d-flex text-white">
