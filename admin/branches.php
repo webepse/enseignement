@@ -24,6 +24,21 @@
     <div class="container-fluid">
         <h1>Les options</h1>
         <a href="addBranche.php" class="btn btn-primary my-3">Ajouter une option</a>
+    <?php
+        if(isset($_GET['add']))
+        {
+            echo '<div class="alert alert-success">Vous avez bien ajouté une option</div>';
+        }
+        if(isset($_GET['update']))
+        {
+            echo '<div class="alert alert-warning">Vous avez bien modifié l\'option n°'.$_GET['id'].'</div>';
+        }
+        if(isset($_GET['delete']))
+        {
+            echo '<div class="alert alert-danger">Vous avez bien supprimé l\'option n°'.$_GET['id'].'</div>';
+        }
+
+    ?>
     <table class="table table-striped">
         <tr>
             <th>id</th>

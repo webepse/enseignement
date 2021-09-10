@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label for="url">Url</label>
-                <input type="url" id="url" name="url" class="form-control">
+                <input type="url" id="url" name="url" class="form-control" value="http://">
             </div>
             <div class="form-group">
                 <label for="deg">Degré</label>
@@ -52,6 +52,12 @@
                 <input type="submit" value="Ajouter" class="btn btn-success my-3">
             </div>
         </form> 
+        <?php
+            if(isset($_GET['err']))
+            {
+                echo '<div class="alert alert-danger">Un problème est survenu</div>';
+            }
+        ?>
     </div>
 </body>
 </html>

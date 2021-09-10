@@ -6,6 +6,23 @@
         header("LOCATION:index.php");
     }  
 
+    if(isset($_GET['id']))
+    {
+      $id=htmlspecialchars($_GET['id']);
+    }else{
+        header("LOCATION:branches.php");
+    }
+  
+    require "../connexion.php";
+    $req = $bdd->prepare("SELECT * FROM options WHERE id=?");
+    $req->execute([$id]);
+    if(!$don = $req->fetch())
+    {
+        $req->closeCursor();
+        header("LOCATION:branches.php");
+    }
+    $req->closeCursor();
+
     /* si form envoyé */
     if(isset($_POST['branche']))
     {
@@ -48,18 +65,19 @@
         if($err==0)
         {
             require "../connexion.php";
-            $insert = $bdd->prepare("INSERT INTO options(branche,description,etablissement,degre,url) VALUES(:branche,:description,:etablissement,:degre,:url)");
-            $insert->execute([
+            $update = $bdd->prepare("UPDATE options SET branche=:branche, description=:description, etablissement=:etablissement, degre=:degre, url=:url WHERE id=:id");
+            $update->execute([
                 ":branche"=>$branche,
                 ":description" => $description,
                 ":etablissement" => $etablissement,
                 ":degre" => $degre,
-                ":url"=>$url
+                ":url"=>$url,
+                ":id"=>$id
             ]);
-            $insert->closeCursor();
-            header("LOCATION:branches.php?add=success");
+            $update->closeCursor();
+            header("LOCATION:branches.php?update=success&id=".$id);
         }else{
-            header("LOCATION:addBranche.php?err=".$err);
+            header("LOCATION:updateBranche.php?id=".$id."&err=".$err);
         }
 
 

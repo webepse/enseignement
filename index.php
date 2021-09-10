@@ -52,19 +52,7 @@
                         echo '</a>';
                        
                     }
-                   
-                }elseif($_GET['degre']=="3")
-                {
-                    $req = $bdd->query("SELECT * FROM options WHERE degre=3");
-                    while($don = $req->fetch())
-                    {
-                        echo '<a href="branche.php?id='.$don['id'].'" class="cards">';
-                        echo '<div class="title">'.$don['branche'].'</div>';
-                        echo '<div class="description">'.nl2br($don['description']).'</div>';
-                        echo '</a>';
-                       
-                    }
-                  
+                                     
                 }else{
                     $req = $bdd->query("SELECT * FROM options");
                     while($don = $req->fetch())
